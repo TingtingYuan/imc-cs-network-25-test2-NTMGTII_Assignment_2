@@ -26,10 +26,9 @@ def setup_server():
 def test_fibonacci(setup_server):
     client = RPCClient(setup_server, 8080)
     client.connect()
-    assert client.fibonacci(8) == 21
-    assert client.fibonacci(3) == 2
-    assert client.fibonacci(0) == 0
-    assert client.fibonacci(-1) == "invalid input"
+    assert client.add(2, 8) == 10
+    assert client.add(3, 9) == 12
+    assert client.sub(6, 3) == 3
     client.disconnect()
 
 
