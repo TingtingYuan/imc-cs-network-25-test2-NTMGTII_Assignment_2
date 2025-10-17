@@ -6,7 +6,7 @@ name: Autograde
 on:
   push:
     branches:
-      - '**'
+      - '**'   # run on all branches (students push to their own branch)
   pull_request:
     branches:
       - '**'
@@ -14,22 +14,24 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 5   # optional safety limit
 
     steps:
-      - name: Checkout student repository
+      - name: Checkout student branch
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'  # or whichever version you want
+          python-version: '3.10'   # or match your course version
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt || true  # optional if you have dependencies
+          pip install pytest
+          pip install -r requirements.txt || true
 
-      - name: Run test script
+      - name: Run pytest
         run: |
-          echo "Running tests..."
-          python rpc_test.py
+          echo "Running tests on branch: ${{ github.ref_name }}"
+          pytest -v --maxfail=1 --disable-warnings
