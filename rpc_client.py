@@ -2,7 +2,6 @@ from rpc import RPCClient
 
 if __name__ == "__main__":
     client = RPCClient('127.0.0.1', 8080)
-
     client.connect()
 
     print("add(5, 6) =", client.add(5, 6))
