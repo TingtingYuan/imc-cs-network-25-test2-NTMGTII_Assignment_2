@@ -1,14 +1,13 @@
 from rpc import RPCServer
 
+
 def add(a, b):
-    return a+b
+    return a + b
+
 
 def sub(a, b):
-    return a-b
+    return a - b
 
-##########################################################
-# Implement your server-side functions HERE
-##########################################################
 
 def fibonacci(n):
     """Return the n-th Fibonacci number, or raise ValueError if invalid."""
@@ -37,18 +36,13 @@ def checksum(byte_array):
         raise ValueError("Invalid input content")
 
 
-
 if __name__ == "__main__":
     server = RPCServer()
 
     server.registerMethod(add)
     server.registerMethod(sub)
-
-    ##########################################################
-    # Register other methods
-    ##########################################################
     server.registerMethod(fibonacci)
     server.registerMethod(checksum)
 
+    print("RPC server starting...")
     server.run()
-
