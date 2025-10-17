@@ -28,6 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install thrift>=0.16.0
           pip install pytest
           pip install -r requirements.txt || true
 
